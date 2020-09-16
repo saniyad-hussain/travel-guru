@@ -6,14 +6,14 @@
 	justify-content: center;
 }
 .card-body {
-	background-image: url('../../resources/Image/sundorbon.png');
-	background-position: center;
-	background-size: cover;
 	border-radius: 10px;
 	height: 280px;
 }
-.card {
+/* .card {
 	background-color: transparent;
 	border-radius: 10px;
 	border: 1px solid #fff;
-}
+background-image: url('../../resources/Image/sundorbon.png');
+	background-position: center;
+	background-size: cover;
+} */

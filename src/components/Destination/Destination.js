@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Destination.css';
+import fakeData from '../../fakeData/fakeData';
+import InfoCard from '../InfoCard/InfoCard';
 
 const Destination = () => {
+	const destinationInfo = fakeData;
+	const [destinations, setDestinations] = useState(destinationInfo);
 	return (
 		<div className="container destination ">
 			<div className="row">
@@ -16,39 +20,9 @@ const Destination = () => {
 				</div>
 				<div className="col-md-8">
 					<div className="row">
-						<div className="col-md-4">
-							<div className="card">
-								<div class="card-body">
-									<h5 class="card-title">Card title</h5>
-									<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-									<a href="#" class="btn btn-primary">
-										Go somewhere
-									</a>
-								</div>
-							</div>
-						</div>
-						<div className="col-md-4">
-							<div className="card">
-								<div class="card-body ">
-									<h5 class="card-title">Card title</h5>
-									<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-									<a href="#" class="btn btn-primary">
-										Go somewhere
-									</a>
-								</div>
-							</div>
-						</div>
-						<div className="col-md-4">
-							<div className="card">
-								<div class="card-body">
-									<h5 class="card-title">Card title</h5>
-									<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-									<a href="#" class="btn btn-primary">
-										Go somewhere
-									</a>
-								</div>
-							</div>
-						</div>
+						{destinations.map((destination) => (
+							<InfoCard destination={destination}></InfoCard>
+						))}
 					</div>
 				</div>
 			</div>
