@@ -2,26 +2,34 @@ import React, { useState } from 'react';
 import './Destination.css';
 import fakeData from '../../fakeData/fakeData';
 import InfoCard from '../InfoCard/InfoCard';
+import { Link } from 'react-router-dom';
 
 const Destination = () => {
 	const destinationInfo = fakeData;
 	const [destinations, setDestinations] = useState(destinationInfo);
+	const [hoverId, setHoverId] = useState(0);
+	const handleHover = (id) => {
+		const hoverInfo = destinations.find((dt) => dt.id === id);
+		setHoverId(hoverInfo);
+	};
 	return (
 		<div className="container destination ">
 			<div className="row">
 				<div className="col-md-4">
 					<div className="info">
-						<h1>CoxBazar</h1>
-						<p>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia quo ipsa earum numquam harum obcaecati, odio eveniet vitae explicabo
-							asperiores voluptas iure dolore illum molestias debitis, deleniti, aut in est.
-						</p>
+						<h1>{hoverId.name}</h1>
+						<p>{hoverId.description}</p>
+						{hoverId.name && (
+							<Link to="/login">
+								<button className="mainBtn">Book Now</button>
+							</Link>
+						)}
 					</div>
 				</div>
 				<div className="col-md-8">
 					<div className="row">
 						{destinations.map((destination) => (
-							<InfoCard destination={destination}></InfoCard>
+							<InfoCard destination={destination} handleHover={handleHover}></InfoCard>
 						))}
 					</div>
 				</div>
