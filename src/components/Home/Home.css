@@ -1,6 +1,6 @@
 .main-area {
 	background-image: url('../../resources/Image/Rectangle\ 1.png');
-	height: 900px;
+	height: 810px;
 	background-size: cover;
 	background-repeat: no-repeat;
 }
@@ -12,5 +12,5 @@
 	top: 0;
 	bottom: 0;
 	background: rgba(0, 0, 0, 0.7);
-	height: 900px;
+	height: 810px;
 }

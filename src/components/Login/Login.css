@@ -1,0 +1,13 @@
+.login-area {
+	width: 30%;
+	margin: auto;
+}
+.space {
+	padding: 25px 0;
+}
+.login-area {
+	margin-top: 60px;
+	padding: 20px 60px 0;
+	border: 1px solid #ababab;
+	border-radius: 5px;
+}
