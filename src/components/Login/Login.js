@@ -1,112 +1,113 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
-import firebaseConfig from './firebase.config';
-import Header from '../Header/Header';
+import { userInfo } from '../../App';
 import './Login.css';
-import { Link } from 'react-router-dom';
-
+const firebaseConfig = {
+	apiKey: 'AIzaSyC6PZwWOxfVvUsNfoQp8uZZLRuYQiIQRmc',
+	authDomain: 'tour-guide-ccd0b.firebaseapp.com',
+	databaseURL: 'https://tour-guide-ccd0b.firebaseio.com',
+	projectId: 'tour-guide-ccd0b',
+	storageBucket: 'tour-guide-ccd0b.appspot.com',
+	messagingSenderId: '1039967621921',
+	appId: '1:1039967621921:web:9eada7c2853525b84b6460',
+};
 firebase.initializeApp(firebaseConfig);
 
 const Login = () => {
-	const [user, setUser] = useState({
-		isLoggedIn: false,
-		firstname: '',
-		lastname: '',
-		email: '',
-		password: '',
-		success: false,
-		error: '',
-	});
-	const handleBlur = (e) => {
-		let validField;
-		if (e.target.name === 'email') {
-			validField = /\S+@\S+\.\S+/.test(e.target.value);
+	const [user, setUser] = useContext(userInfo);
+	const [newUser, setNewUser] = useState(false);
+
+	const handleChange = (e) => {
+		const fname = e.target.name;
+		const fvalue = e.target.value;
+		let isFieldValid;
+		if (fname === 'email') {
+			isFieldValid = /\S+@\S+\.\S+/.test(fvalue);
 		}
-		if (e.target.name === 'password') {
-			const passwordLength = e.target.value.lenght > 6;
-			const hasNumber = /\d{1}/.test(e.target.value);
-			validField = passwordLength && hasNumber;
+		if (fname === 'password') {
+			const passwordLength = fvalue.length > 6;
+			const containNumber = /\d{1}/.test(fvalue);
+			isFieldValid = passwordLength && containNumber;
 		}
-		if (validField) {
+		if (isFieldValid) {
 			const newUser = { ...user };
-			newUser[e.target.name] = e.target.value;
-			console.log(setUser(newUser));
+			newUser[fname] = fvalue;
+			setUser(newUser);
 		}
 	};
-
 	const handleSubmit = (e) => {
-		if (user.email && user.password) {
+		if (newUser && user.email && user.password) {
 			firebase
 				.auth()
 				.createUserWithEmailAndPassword(user.email, user.password)
 				.then((res) => {
-					console.log(res);
+					const newUser = { ...user };
+					newUser.success = true;
+					setUser(newUser);
 				})
-				.catch(function (error) {
-					// Handle Errors here.
-					var errorCode = error.code;
-					var errorMessage = error.message;
-					// ...
+				.catch((error) => {
+					console.log(error);
 				});
 		}
+
+		if (!newUser && user.email && user.password) {
+			firebase
+				.auth()
+				.signInWithEmailAndPassword(user.email, user.password)
+				.then((res) => {
+					const loggedUser = { ...user };
+					loggedUser.isLoggedIn = true;
+					setUser(loggedUser);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		}
+
+		e.preventDefault();
 	};
-
 	return (
-		<div>
-			<Header></Header>
-			<div className="login-area">
-				{user.success && <p>Account Created Successfully</p>}
-				<form>
-					<div className="form-group">
-						<label htmlFor="firstname">First Name</label>
-						<input type="text" name="firstname" onBlur={handleBlur} className="form-control" id="" />
-					</div>
-					<div className="form-group">
-						<label htmlFor="lastname">Last Name</label>
-						<input type="text" name="lastname" onBlur={handleBlur} className="form-control" id="" />
-					</div>
-					<div className="form-group">
-						<label htmlFor="email">Username Or Email</label>
-						<input type="text" name="email" onBlur={handleBlur} className="form-control" id="" />
-					</div>
-					<div className="form-group">
-						<label htmlFor="password">Password</label>
-						<input type="password" name="password" onBlur={handleBlur} className="form-control" id="" />
-					</div>
-					<div className="d-flex justify-content-between p-2 space">
-						<div class="form-check">
-							<input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-							<label className="form-check-label" for="defaultCheck1">
-								Remember Password
-							</label>
+		<div className="login-area">
+			<form onSubmit={handleSubmit}>
+				{newUser ? (
+					<div>
+						<div className="form-group">
+							<label htmlFor="firstname">First Name</label>
+							<input type="text" name="firstname" onBlur={handleChange} className="form-control" id="" />
 						</div>
-						<div>
-							<a href="/"> Forgot Password?</a>
+						<div className="form-group">
+							<label htmlFor="lastname">Last Name</label>
+							<input type="text" name="lastname" onBlur={handleChange} className="form-control" id="" />
 						</div>
-					</div>
 
-					<input onClick={handleSubmit} type="submit" value="Sign In" className="bookingBtn" />
-					<div className="space">
-						<p className="text-center">
-							Don't Have Account? <button> Create New Account</button>
-						</p>
+						<div className="form-group">
+							<label htmlFor="email">Email</label>
+							<input type="text" name="email" onBlur={handleChange} className="form-control" id="" />
+						</div>
+						<div className="form-group">
+							<label htmlFor="password">Password</label>
+							<input type="password" name="password" onBlur={handleChange} className="form-control" id="" />
+						</div>
+						<input type="submit" value="Submit" />
 					</div>
-				</form>
-			</div>
-			<div className="text-center login-footer">
-				<div>
-					<p>Or</p>
-				</div>
-				<div className="fbgoogle">
-					<img src="../../resources/Icon/fb.png" alt="" />
-					<p> Continue With Facebook</p>
-				</div>
-				<div className="fbgoogle">
-					<img src="../../resources/Icon/google.png" alt="" />
-					<p> Continue With Google</p>
-				</div>
-			</div>
+				) : (
+					<div>
+						<div className="form-group">
+							<label htmlFor="email">Email</label>
+							<input type="text" name="email" onBlur={handleChange} className="form-control" id="" />
+						</div>
+						<div className="form-group">
+							<label htmlFor="password">Password</label>
+							<input type="password" name="password" onBlur={handleChange} className="form-control" id="" />
+						</div>
+						<input type="submit" value="Submit" />{' '}
+					</div>
+				)}
+			</form>
+			{user.success && <h1>Created {console.log(user)}</h1>}
+			{user.isLoggedIn && <h1>{console.log(user)}</h1>}
+			<button onClick={() => setNewUser(!newUser)}>{newUser ? 'Login' : 'SignUp'}</button>
 		</div>
 	);
 };

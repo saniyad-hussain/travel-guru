@@ -16,15 +16,27 @@ const Destination = () => {
 		<div className="container destination ">
 			<div className="row">
 				<div className="col-md-4">
-					<div className="info">
-						<h1>{hoverId.name}</h1>
-						<p>{hoverId.description}</p>
-						{hoverId.name && (
-							<Link to="/login">
-								<button className="mainBtn">Book Now</button>
-							</Link>
-						)}
-					</div>
+					{hoverId ? (
+						<div className="info">
+							<h1>{hoverId.name}</h1>
+							<p>{hoverId.description}</p>
+							{hoverId.name && (
+								<Link to="/login">
+									<button className="mainBtn">Book Now</button>
+								</Link>
+							)}
+						</div>
+					) : (
+						<div className="info">
+							<h1>{destinationInfo[0].name}</h1>
+							<p>{destinationInfo[0].description}</p>
+							{destinationInfo[0].name && (
+								<Link to="/login">
+									<button className="mainBtn">Book Now</button>
+								</Link>
+							)}
+						</div>
+					)}
 				</div>
 				<div className="col-md-8">
 					<div className="row">

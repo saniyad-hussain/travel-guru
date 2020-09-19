@@ -18,3 +18,11 @@
 .navbar-brand {
 	filter: brightness(21.5);
 }
+.conditional-logo {
+	filter: brightness(0);
+}
+.conditional-nav a {
+	background-color: gray;
+	border-radius: 10px;
+	font-size: 14px;
+}
