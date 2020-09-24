@@ -7,13 +7,13 @@ import SingleDestination from './components/SingleDestination/SingleDestination'
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import Hotel from './components/Hotel/Hotel';
 import Login from './components/Login/Login';
+import NotFound from './NotFound/NotFound';
 export const userInfo = createContext();
 
 function App() {
 	const [user, setUser] = useState({
 		isLoggedIn: false,
 		firstname: '',
-		lastname: '',
 		email: '',
 		password: '',
 		success: false,
@@ -33,9 +33,12 @@ function App() {
 					<Route path="/login">
 						<Login />
 					</Route>
-					<PrivateRoute path="/booking">
+					<PrivateRoute path="/booking/:id">
 						<Hotel></Hotel>
 					</PrivateRoute>
+					<Route path="*">
+						<NotFound />
+					</Route>
 				</Switch>
 			</Router>
 		</userInfo.Provider>

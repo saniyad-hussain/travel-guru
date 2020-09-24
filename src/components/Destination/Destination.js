@@ -21,8 +21,8 @@ const Destination = () => {
 							<h1>{hoverId.name}</h1>
 							<p>{hoverId.description}</p>
 							{hoverId.name && (
-								<Link to="/login">
-									<button className="mainBtn">Book Now</button>
+								<Link to="/destination/1">
+									<button className="mainBtn">Explore Now</button>
 								</Link>
 							)}
 						</div>
@@ -31,7 +31,7 @@ const Destination = () => {
 							<h1>{destinationInfo[0].name}</h1>
 							<p>{destinationInfo[0].description}</p>
 							{destinationInfo[0].name && (
-								<Link to="/login">
+								<Link to="/destination/1">
 									<button className="mainBtn">Book Now</button>
 								</Link>
 							)}

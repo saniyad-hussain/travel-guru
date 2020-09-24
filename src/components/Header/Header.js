@@ -9,13 +9,17 @@ const Header = () => {
 	return (
 		<div className="container ">
 			<nav className="navbar navbar-expand-lg navbar-light  header-area">
-				<a className="navbar-brand" href="/">
-					{window.location.pathname === '/login' || window.location.pathname === '/signup' ? (
-						<img src={logo} className="conditional-logo" alt="" />
+				<Link to="/">
+					{window.location.pathname !== '/login' || window.location.pathname !== '/booking' ? (
+						<a className="navbar-brand">
+							<img src={logo} alt="" />
+						</a>
 					) : (
-						<img src={logo} alt="" />
+						<a className="">
+							<img src={logo} alt="" />
+						</a>
 					)}
-				</a>
+				</Link>
 				<form action="">
 					<input type="text" name="" id="search-box" placeholder="Search Your Destination" />
 				</form>
@@ -31,23 +35,7 @@ const Header = () => {
 					<span className="navbar-toggler-icon"></span>
 				</button>
 				<div className="collapse navbar-collapse " id="navbarNavAltMarkup">
-					{window.location.pathname === '/login' || window.location.pathname === '/signup' ? (
-						<div className="navbar-nav ml-auto conditional-nav">
-							<a className="nav-link active" href="#">
-								News <span className="sr-only">(current)</span>
-							</a>
-							<a className="nav-link" href="#">
-								Blog
-							</a>
-							<a className="nav-link" href="#">
-								Destination
-							</a>
-							<a className="nav-link " href="#">
-								Contact
-							</a>
-							<button className="mainBtn">Login</button>
-						</div>
-					) : (
+					{window.location.pathname === '/' ? (
 						<div className="navbar-nav ml-auto ">
 							<a className="nav-link active" href="#">
 								News <span className="sr-only">(current)</span>
@@ -61,10 +49,42 @@ const Header = () => {
 							<a className="nav-link " href="#">
 								Contact
 							</a>
-							<p>{user.firstName}</p>
-							<button onClick={() => setUser({})} className="mainBtn">
-								Sign Out
-							</button>
+
+							{user.isLoggedIn ? (
+								<button onClick={() => setUser({})} className="mainBtn">
+									SignOut
+								</button>
+							) : (
+								<Link to="/login">
+									<button className="mainBtn">Login</button>
+								</Link>
+							)}
+							<small className="profile">{user.firstname}</small>
+						</div>
+					) : (
+						<div className="navbar-nav ml-auto conditional-nav">
+							<a className="nav-link active" href="#">
+								News <span className="sr-only">(current)</span>
+							</a>
+							<a className="nav-link" href="#">
+								Blog
+							</a>
+							<a className="nav-link" href="#">
+								Destination
+							</a>
+							<a className="nav-link " href="#">
+								Contact
+							</a>
+							<p className="profile">{user.firstname}</p>
+							{user.isLoggedIn ? (
+								<button onClick={() => setUser({})} className="mainBtn">
+									SignOut
+								</button>
+							) : (
+								<Link to="/login">
+									<button className="mainBtn">Login</button>
+								</Link>
+							)}
 						</div>
 					)}
 				</div>

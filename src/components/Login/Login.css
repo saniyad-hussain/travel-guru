@@ -11,3 +11,28 @@
 	border: 1px solid #ababab;
 	border-radius: 5px;
 }
+.warning {
+	color: red;
+}
+.submitBtn {
+	font-weight: 500;
+	text-transform: uppercase;
+	background: rgb(249, 165, 26);
+	border-radius: 5px;
+	padding: 10px 60px;
+	border-width: initial;
+	border-style: none;
+	border-color: initial;
+	border-image: initial;
+}
+.google-login {
+	width: 100%;
+	font-size: 18px;
+	border-radius: 10px;
+	border: gray;
+	margin: 10px;
+}
+.icons {
+	width: 28px;
+	margin-right: 10px;
+}
