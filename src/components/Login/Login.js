@@ -33,6 +33,7 @@ const Login = () => {
 	});
 	const [newUser, setNewUser] = useState(false);
 	const [warning, setWarning] = useState({
+		nameWarn: '',
 		emailWarn: '',
 		passwordWarn: '',
 		password: '',
@@ -46,7 +47,12 @@ const Login = () => {
 		const fvalue = e.target.value;
 		let isFieldValid;
 		if (fname === 'firstname') {
-			isFieldValid = fvalue.length > 0;
+			if (fvalue.length > 0) {
+				isFieldValid = true;
+			} else {
+				isFieldValid = false;
+				setWarning({ nameWarn: 'Name Cant Blank' });
+			}
 		}
 		if (fname === 'email') {
 			if (/\S+@\S+\.\S+/.test(fvalue)) {
@@ -161,22 +167,22 @@ const Login = () => {
 						<div>
 							<div className="form-group">
 								<label htmlFor="firstname">Name</label>
-								<input type="text" name="firstname" onBlur={handleChange} className="form-control" id="" />
+								<input type="text" name="firstname" onBlur={handleChange} className="form-control" id="" required />
 							</div>
 
 							<div className="form-group">
 								<label htmlFor="email">Email</label>
-								<input type="text" name="email" onBlur={handleChange} className="form-control" id="emailInput" />
+								<input type="text" name="email" onBlur={handleChange} className="form-control" id="emailInput" required />
 								{warning.emailWarn}
 							</div>
 							<div className="form-group">
 								<label htmlFor="password">Password</label>
-								<input type="password" name="password" onBlur={handleChange} className="form-control" id="" />
+								<input type="password" name="password" onBlur={handleChange} className="form-control" id="" required />
 								{warning.passwordWarn}
 							</div>
 							<div className="form-group">
 								<label htmlFor="password">Confirm Password</label>
-								<input type="password" name="confirmPssword" onBlur={handleChange} className="form-control" id="" />
+								<input type="password" name="confirmPssword" onBlur={handleChange} className="form-control" id="" required />
 								{warning.confirmPassword}
 							</div>
 							<p className="warning">{user.error}</p>

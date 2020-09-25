@@ -8,6 +8,7 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import Hotel from './components/Hotel/Hotel';
 import Login from './components/Login/Login';
 import NotFound from './NotFound/NotFound';
+
 export const userInfo = createContext();
 
 function App() {
