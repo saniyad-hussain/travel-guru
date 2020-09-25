@@ -3,11 +3,13 @@ import './Destination.css';
 import fakeData from '../../fakeData/fakeData';
 import InfoCard from '../InfoCard/InfoCard';
 import { Link } from 'react-router-dom';
+import Carousel from 'react-elastic-carousel';
 
 const Destination = () => {
 	const destinationInfo = fakeData;
 	const [destinations, setDestinations] = useState(destinationInfo);
 	const [hoverId, setHoverId] = useState(0);
+	const breakPoints = [{ width: 700, itemsToShow: 2 }];
 	const handleHover = (id) => {
 		const hoverInfo = destinations.find((dt) => dt.id === id);
 		setHoverId(hoverInfo);
@@ -21,7 +23,7 @@ const Destination = () => {
 							<h1>{hoverId.name}</h1>
 							<p>{hoverId.description}</p>
 							{hoverId.name && (
-								<Link to="/destination/1">
+								<Link to={`/destination/${hoverId.id}`}>
 									<button className="mainBtn">Explore Now</button>
 								</Link>
 							)}
@@ -39,10 +41,14 @@ const Destination = () => {
 					)}
 				</div>
 				<div className="col-md-8">
-					<div className="row">
-						{destinations.map((destination) => (
-							<InfoCard destination={destination} handleHover={handleHover}></InfoCard>
-						))}
+					<div className="container">
+						<div className="row">
+							<Carousel breakPoints={breakPoints} enableAutoPlay autoPlaySpeed={2000} transitionMs={1000}>
+								{destinations.map((destination) => (
+									<InfoCard destination={destination} handleHover={handleHover}></InfoCard>
+								))}
+							</Carousel>
+						</div>
 					</div>
 				</div>
 			</div>

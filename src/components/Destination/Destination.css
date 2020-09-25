@@ -8,6 +8,7 @@
 
 .card {
 	height: 300px;
+	width: 280px;
 	overflow: hidden;
 	position: relative;
 	background-position: center;
@@ -34,4 +35,14 @@
 .card-text a {
 	color: cyan;
 	text-decoration: none;
+}
+.rec.rec-arrow {
+	color: #f9a51a;
+}
+.rec.rec-arrow:hover {
+	background-color: #f9a51a;
+}
+
+.rec.rec-dot {
+	color: red;
 }
