@@ -112,6 +112,7 @@ const Login = () => {
 				.then((res) => {
 					const newUser = { ...user };
 					newUser.success = true;
+					newUser.isLoggedIn = true;
 					newUser.error = '';
 					setUser(newUser);
 					history.replace(from);
@@ -168,22 +169,23 @@ const Login = () => {
 							<div className="form-group">
 								<label htmlFor="firstname">Name</label>
 								<input type="text" name="firstname" onBlur={handleChange} className="form-control" id="" required />
+								<p className="warning">{warning.nameWarn}</p>
 							</div>
 
 							<div className="form-group">
 								<label htmlFor="email">Email</label>
 								<input type="text" name="email" onBlur={handleChange} className="form-control" id="emailInput" required />
-								{warning.emailWarn}
+								<p className="warning">{warning.emailWarn}</p>
 							</div>
 							<div className="form-group">
 								<label htmlFor="password">Password</label>
 								<input type="password" name="password" onBlur={handleChange} className="form-control" id="" required />
-								{warning.passwordWarn}
+								<p className="warning">{warning.passwordWarn}</p>
 							</div>
 							<div className="form-group">
 								<label htmlFor="password">Confirm Password</label>
 								<input type="password" name="confirmPssword" onBlur={handleChange} className="form-control" id="" required />
-								{warning.confirmPassword}
+								<p className="warning">{warning.confirmPassword}</p>
 							</div>
 							<p className="warning">{user.error}</p>
 							<button type="submit" className="btn btn-success">

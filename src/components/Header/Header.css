@@ -21,11 +21,11 @@
 .conditional-logo {
 	filter: brightness(0);
 }
-.conditional-nav a {
+/* .conditional-nav a {
 	background-color: gray;
 	border-radius: 10px;
 	font-size: 14px;
-}
+} */
 .profile {
 	color: #f9a51a;
 	font-size: 17px;
