@@ -1,4 +1,32 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Creative Agency
+
+## _[Go Live](https://tour-guide-ccd0b.web.app/)_
+
+## Main Features :
+   - **A travelling website where user can select any suitable destination**
+   - **User can register a booking form with selected location and arrival date.**
+   - **User can place an order for particular room.**
+ 
+
+## Tools Used:
+   - React.js
+   - Express.js
+   - Firebase
+   - HTML
+   - CSS
+   - Bootstrap
+
+## _[Packages Used](./package.json)_
+   - react-dom
+   - react-router-dom
+   - react-responsive-carousel 3.2.10
+   - slick-carousel 1.8.1
+   - react-select 3.1.0
+   - firebase 7.22.0
+   - bootstrap 4.5.2
+   - react-fontawesome 0.1.11
+
+
 
 ## Available Scripts
 
